@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: nodjs
+        working-directory: nodejs
     steps:
       - name: cache node modules
         uses: actions/cache@v6

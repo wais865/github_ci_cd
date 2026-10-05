@@ -1,6 +1,14 @@
-name: PythonCi
+name: PythonCiCD
 
-on: [push]
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'python/**'
+      - '.github/workflows/python_ci_cd.yml'
+  pull_request:
+    paths:
+      - 'python/**'
 
 jobs:
   test-python:

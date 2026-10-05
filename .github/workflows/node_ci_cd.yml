@@ -1,6 +1,14 @@
 name: NodeCiCD
 
-on: [push]
+on: 
+  push:
+    branches: [main]
+    paths:
+      - 'nodejs/**'
+      - '.github/workflows/node_ci_cd.yml'
+  pull_request:
+    paths:
+      - 'nodejs/**'
 
 jobs:
   test-node:
@@ -28,4 +36,25 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+
+  deploy:
+    needs: test-node
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: nodejs/public
+      - id: deployment
+        uses: actions/deploy-pages@v3
+        
+      
   

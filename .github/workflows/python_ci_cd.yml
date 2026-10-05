@@ -1,4 +1,4 @@
-name: GithubCi
+name: PythonCi
 
 on: [push]
 

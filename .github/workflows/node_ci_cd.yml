@@ -1,4 +1,4 @@
-name: GithubCi
+name: NodeCiCD
 
 on: [push]
 
